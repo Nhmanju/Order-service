@@ -7,11 +7,12 @@ pipeline {
         jdk 'jdk17' 
     }
 
-    stages {
-        stage('Pulling the repo') {
+    stage('Pulling the repo') {
             steps {
-                // Fixed: Added single quotes around branch and url
-                git branch: 'main', url: 'https://github.com'
+                // Fixed: Added your exact repository URL and the credential ID we created earlier
+                git branch: 'main', 
+                    credentialsId: 'github-creds', 
+                    url: 'https://github.com'
             }
         }
 
