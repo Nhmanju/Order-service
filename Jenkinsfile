@@ -7,7 +7,7 @@ pipeline {
         jdk 'jdk17' 
     }
 
-    stage('Pulling the repo') {
+           stage('Pulling the repo') {
             steps {
                 // Fixed: Added your exact repository URL and the credential ID we created earlier
                 git branch: 'main', 
