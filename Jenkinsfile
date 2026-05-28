@@ -1,33 +1,38 @@
-pipeline{
+pipeline {
     agent any
 
-    tools{
+    tools {
+        // Must match your Jenkins Global Tool Configuration names exactly
         maven 'maven3'
-        javejdk 'java21'
+        jdk 'java21' 
     }
-    stages{
-        stage("pulling the repo")
-        steps{
-        git branch: main, url ''
-        }
-        stage('build && test')
-        {
-            steps{
-              sh 'mvn clean package'
+
+    stages {
+        stage('Pulling the repo') {
+            steps {
+                // Fixed: Added single quotes around branch and url
+                git branch: 'main', url: 'https://github.com'
             }
         }
-        stage('deploy application')
-        {
-            steps{
-                sh ```
-                pkill -f order-service || true
-                nohup java -jar target/order-service-1.0.0.jar > app.log 2>&1 &
-                ```
+
+        stage('Build & Test') {
+            steps {
+                sh 'mvn clean package'
             }
         }
-        stage('health-check')
-        {
-            steps{
+
+        stage('Deploy Application') {
+            steps {
+                // Fixed: Groovy multiline string uses triple single-quotes ('''), not backticks (```)
+                sh '''
+                    pkill -f order-service || true
+                    nohup java -jar target/order-service-1.0.0.jar > app.log 2>&1 &
+                '''
+            }
+        }
+
+        stage('Health Check') {
+            steps {
                 sleep 10
                 sh 'curl -f http://localhost:8080/api/orders/health'
             }
