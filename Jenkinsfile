@@ -13,7 +13,7 @@ pipeline {
                 // Fixed: Corrected the full repository URL path
                 git branch: 'main', 
                     credentialsId: 'github-creds', 
-                    url: 'https://github.com'
+                    url: 'https://github.com/Nhmanju/Order-service.git'
             }
         }
 
