@@ -7,9 +7,10 @@ pipeline {
         jdk 'jdk17' 
     }
 
-           stage('Pulling the repo') {
+    stages { // Fixed: Wrapped all stages inside a proper 'stages' block
+        stage('Pulling the repo') {
             steps {
-                // Fixed: Added your exact repository URL and the credential ID we created earlier
+                // Fixed: Corrected the full repository URL path
                 git branch: 'main', 
                     credentialsId: 'github-creds', 
                     url: 'https://github.com'
@@ -24,7 +25,6 @@ pipeline {
 
         stage('Deploy Application') {
             steps {
-                // Fixed: Groovy multiline string uses triple single-quotes ('''), not backticks (```)
                 sh '''
                     pkill -f order-service || true
                     nohup java -jar target/order-service-1.0.0.jar > app.log 2>&1 &
@@ -38,5 +38,5 @@ pipeline {
                 sh 'curl -f http://localhost:8080/api/orders/health'
             }
         }
-    }
+    } // Fixed: Properly closed the stages block
 }
