@@ -25,9 +25,13 @@ pipeline {
 
         stage('Deploy Application') {
             steps {
+                // Fixed: Added JENKINS_NODE_COOKIE to prevent Jenkins from killing background processes
+                // Fixed: Explicitly redirect stdout and stderr to safely detach the process
                 sh '''
+                    export JENKINS_NODE_COOKIE=dontKillMe
                     pkill -f order-service || true
                     nohup java -jar target/order-service-1.0.0.jar > app.log 2>&1 &
+                    sleep 2
                 '''
             }
         }
