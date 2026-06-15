@@ -1,1 +1,4 @@
 int data =0;
+feature =0;
+data=400;
+user=400;
