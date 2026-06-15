@@ -2,3 +2,4 @@ Version is 1.8
 version 1.9
 check git repo
 I'm in feature
+check feature 3
