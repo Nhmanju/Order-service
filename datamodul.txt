@@ -1,1 +1,2 @@
 int data =0;
+data=600;
