@@ -1,4 +1,9 @@
 Version is 1.8
 version 1.9
 check git repo
+<<<<<<< HEAD
 this is main branch
+=======
+I'm in feature
+check feature 3
+>>>>>>> feature

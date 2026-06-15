@@ -1,2 +1,9 @@
 int data =0;
+<<<<<<< HEAD
 data=600;
+=======
+feature =0;
+data=400;
+user=400;
+dataM=8999;
+>>>>>>> feature
